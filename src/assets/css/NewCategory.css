@@ -1,0 +1,16 @@
+.new-category {
+  width: 100%;
+  flex: 15 1 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column wrap;
+  place-content: center space-around;
+}
+
+.new-category form {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+    height: 30vh;
+
+}

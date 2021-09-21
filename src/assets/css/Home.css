@@ -1,0 +1,20 @@
+.home {
+  width: 100%;
+  flex: 15 1 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column wrap;
+  place-content: center space-around;
+}
+
+.home div {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    width: 70em;
+    height: 20em;
+}
+
+.home div hr {
+    width: 100%;
+}

@@ -1,0 +1,35 @@
+.category-main {
+  width: 100%;
+  flex: 15 1 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column wrap;
+  place-content: center space-around;
+}
+
+.loading {
+  color: #fff;
+  animation-name: focus-in-contract;
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+}
+@keyframes focus-in-contract {
+  0% {
+    letter-spacing: 1em;
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.category {
+  border: #fff solid 1px;
+  padding: 3px;
+}
