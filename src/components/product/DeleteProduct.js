@@ -1,3 +1,4 @@
+import "../../assets/css/product/deleteProduct.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
@@ -10,19 +11,19 @@ const DeleteProduct = () => {
     const [deleted, setDeleted] = useState(false)
 
     useEffect(() => {
-        setProduct(JSON.parse(localStorage.getItem('Product')))
+        setProduct(JSON.parse(localStorage.getItem('product')))
         setLoadingData(false)
     }, [])
 
     const handleDelete = () => {
-        axios.delete(`https://inv-hub.herokuapp.com/api/categories/${product._id}/delete`)
-            .then(setTimeout(() => { history.push('/categories') }, 2000))
+        axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)
+            .then(setTimeout(() => { history.push('/products') }, 2000))
         setDeleted(true)
     }
 
     const content = () => (
         <div>
-            {deleted && <h2>Product Deleted!!!</h2>}
+            {deleted && <h2>Product Deleted!!!, Redirecting...</h2>}
             <h1>{product.name}</h1>
             <p>{product.description}</p>
             <button onClick={handleDelete}>Delete</button>

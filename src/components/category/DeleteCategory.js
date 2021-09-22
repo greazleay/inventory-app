@@ -1,3 +1,4 @@
+import "../../assets/css/product/deleteProduct.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
@@ -22,7 +23,7 @@ const DeleteCategory = () => {
 
     const content = () => (
         <div>
-            {deleted && <h2>Category Deleted!!!</h2>}
+            {deleted && <h2>Category Deleted!!! Redirecting....</h2>}
             <h1>{category.name}</h1>
             <p>{category.description}</p>
             <button onClick={handleDelete}>Delete</button>

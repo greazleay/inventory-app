@@ -1,4 +1,4 @@
-import "../../assets/css/Categories.css";
+import "../../assets/css/category/categories.css";
 import React from "react";
 import { Link } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import "../../assets/css/Categories.css";
+import "../../assets/css/product/products.css";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,8 +22,9 @@ const Products = () => {
         <div className="product" key={product._id}>
             <h2>{product.name}</h2>
             <p>{product.description}</p>
+            <img src={product.img} alt="" />
             <Link to={`/products/${product._id}`}>
-                <button>View product</button>
+                <button>View Product</button>
             </Link>
         </div>
     ));
@@ -37,7 +38,7 @@ const Products = () => {
 
     return (
         <main className="product-main">
-            {loadingProducts ? <p className="loading">Loading products.....</p> : content}
+            {loadingProducts ? <p className="loading">Loading Products.....</p> : content}
         </main>
     )
 };

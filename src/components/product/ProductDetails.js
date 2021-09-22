@@ -1,4 +1,4 @@
-import "../../assets/css/CategoryDetail.css";
+import "../../assets/css/product/productDetails.css";
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -27,14 +27,17 @@ const ProductDetails = () => {
     const content = () => (<>
         <h2>{product.name}</h2>
         <p>{product.description}</p>
+        {product.categories.length && product.categories.map(category => 
+            <p key={category._id}>{category.name}</p>
+        )}
         <p>{product.price}</p>
         <p>{product.stock}</p>
         <img src={product.img} alt=""/>
         <Link to={`/products/${id}/modify`}>
-            <button onClick={() => setUpdateData(product)}>Modify product</button>
+            <button onClick={() => setUpdateData(product)}>Modify Product</button>
         </Link>
         <Link to={`/products/${id}/delete`}>
-            <button onClick={() => setUpdateData(product)}>Delete product</button>
+            <button onClick={() => setUpdateData(product)}>Delete Product</button>
         </Link>
     </>)
     return (

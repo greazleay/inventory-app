@@ -1,4 +1,4 @@
-import "../../assets/css/CategoryDetail.css";
+import "../../assets/css/category/categoryDetails.css";
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -27,6 +27,15 @@ const CategoryDetail = () => {
     const content = () => (<>
         <h2>{item.category.name}</h2>
         <p>{item.category.description}</p>
+        <hr />
+        {item.category_products.length && item.category_products.map(product =>
+            <div key={product._id}>
+                <p>{product.name}</p>
+                <p>{product.description}</p>
+                <img src={product.img} alt="" />
+
+            </div>
+        )}
         <Link to={`/categories/${id}/modify`}>
             <button onClick={() => setUpdateData(item.category)}>Modify Category</button>
         </Link>

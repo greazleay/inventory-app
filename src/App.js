@@ -29,6 +29,10 @@ const App = () => {
     fetchCategories()
   }, [])
 
+  const filteredCategory = categories.map(category => {
+    return {id: category._id, name: category.name}
+  });
+
   return (
     <Router>
       <div className="container">
@@ -42,8 +46,8 @@ const App = () => {
           <Route exact path="/categories/:id/delete"><DeleteCategory /></Route>
           <Route exact path="/products"><Products /></Route>
           <Route exact path="/products/:id"><ProductDetails /></Route>
-          <Route exact path="/new-product"><NewProduct /></Route>
-          <Route exact path="/products/:id/modify"><ModifyProduct /></Route>
+          <Route exact path="/new-product"><NewProduct categories={filteredCategory}/></Route>
+          <Route exact path="/products/:id/modify"><ModifyProduct categoryList={filteredCategory}/></Route>
           <Route exact path="/products/:id/delete"><DeleteProduct /></Route>
         </Switch>
         <Footer />

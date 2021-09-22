@@ -1,3 +1,4 @@
+import "../../assets/css/category/newCategory.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useForm } from "react-hook-form";
@@ -24,7 +25,7 @@ const ModifyCategory = () => {
 
     const form = () => (
         <form onSubmit={handleSubmit(onSubmit)}>
-            {submitted ? <p>Success! Category Modified</p> : null}
+            {submitted && <p>Success!!! Category Modified, redirecting....</p>}
             <fieldset>
                 <label htmlFor="name">Name</label>
                 <input {...register('name', { required: "NAME REQUIRED", minLength: 1, value: `${category.name}` })} />
@@ -32,8 +33,8 @@ const ModifyCategory = () => {
             </fieldset>
             <fieldset>
                 <label htmlFor="description">Description</label>
-                <textarea {...register('description', { required: true, minLength: 1, value: `${category.description}` })} />
-                {errors.description && <p>Please add a brief description</p>}
+                <textarea {...register('description', { required: "PLEASE ADD A BRIEF DESCRIPTION", minLength: 1, value: `${category.description}` })} />
+                {errors.description && <p>{errors.description.message}</p>}
             </fieldset>
             <button type="submit">Modify</button>
         </form>
