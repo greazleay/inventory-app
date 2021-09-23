@@ -18,6 +18,10 @@ const DeleteProduct = () => {
     const handleDelete = () => {
         axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)
             .then(setTimeout(() => { history.push('/products') }, 2000))
+            .catch((err) => {
+                console.log(err.message)
+                return
+            })
         setDeleted(true)
     }
 

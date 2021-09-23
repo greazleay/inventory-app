@@ -1,5 +1,5 @@
 import "../../assets/css/category/categoryDetails.css";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
@@ -7,18 +7,25 @@ const CategoryDetail = () => {
 
     const [loadingCategory, setLoadingCategory] = useState(true);
     const [item, setItem] = useState({});
-    const { id } = useParams()
-
-    const fetchCategory = useCallback(async () => {
-        const res = await fetch(`https://inv-hub.herokuapp.com/api/categories/${id}`);
-        const data = await res.json();
-        setItem(data);
-        setLoadingCategory(false);
-    }, [id])
+    const { id } = useParams();
 
     useEffect(() => {
-        fetchCategory()
-    }, [fetchCategory])
+        const fetchCategory = async () => {
+            let res;
+            try {
+                res = await fetch(`https://inv-hub.herokuapp.com/api/categories/${id}`);
+                if (!res.ok) throw new Error('Something went wrong')    
+            } catch (err) {
+                console.log(err.message);
+                return
+            }
+            
+            const data = await res.json();
+            setItem(data);
+            setLoadingCategory(false);
+        };
+        fetchCategory();
+    }, [id])
 
     const setUpdateData = (data) => {
         localStorage.setItem('category', JSON.stringify(data));

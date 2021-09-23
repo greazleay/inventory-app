@@ -8,7 +8,15 @@ const Products = () => {
     const [products, setProducts] = useState([]);
 
     const fetchProducts = async () => {
-        const res = await fetch('https://inv-hub.herokuapp.com/api/products');
+        let res;
+        try {
+            res = await fetch('https://inv-hub.herokuapp.com/api/products');
+            if (!res.ok) throw new Error('Something went wrong')    
+        } catch (err) {
+            console.log(err.message);
+            return
+        }
+        
         const data = await res.json();
         setProducts(data);
         setLoadingProducts(false)

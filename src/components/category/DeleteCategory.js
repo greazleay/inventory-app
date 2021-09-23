@@ -18,6 +18,10 @@ const DeleteCategory = () => {
     const handleDelete = () => {
         axios.delete(`https://inv-hub.herokuapp.com/api/categories/${category._id}/delete`)
             .then(setTimeout(() => { history.push('/categories') }, 2000))
+            .catch((err) => {
+                console.log(err.message)
+                return
+            })
         setDeleted(true)
     }
 

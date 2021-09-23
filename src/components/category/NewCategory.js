@@ -2,13 +2,13 @@ import "../../assets/css/category/newCategory.css";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
-
 import axios from "axios";
 
 
-const CreateCategory = () => {
+const CreateCategory = ({ reloadCategories }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [submitted, setSubmitted] = useState(false);
+    const [reload, setReload] = useState(false);
     let history = useHistory();
 
     const onSubmit = (data) => {
@@ -16,7 +16,15 @@ const CreateCategory = () => {
             .then(setTimeout(() => {
                 history.push('/categories')
             }, 2000))
-        setSubmitted(true)
+            .catch((err) => {
+                console.log(err.message);
+                return
+            })
+        setSubmitted(true);
+        let toggler = reload ? false : true
+        setReload(toggler);
+        reloadCategories(toggler)
+        console.log('===toggler====>', toggler)
     }
 
     return (

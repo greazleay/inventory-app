@@ -20,6 +20,10 @@ const ModifyCategory = () => {
     const onSubmit = (data) => {
         axios.put(`https://inv-hub.herokuapp.com/api/categories/${category._id}/update`, data)
             .then(setTimeout(() => { history.push(`/categories/${category._id}`) }, 2000))
+            .catch((err) => {
+                console.log(err.message)
+                return
+            })
         setSubmitted(true)
     }
 

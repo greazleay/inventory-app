@@ -18,6 +18,10 @@ const NewProduct = (props) => {
             .then(setTimeout(() => {
                 history.push('/products')
             }, 2000))
+            .catch((err) => {
+                console.log(err.message)
+                return
+            })
         setSubmitted(true)
     }
 
@@ -55,7 +59,7 @@ const NewProduct = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="img">Image</label>
-                    <input {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" />
+                    <input {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" accept=".png, .jpg"/>
                     {errors.img && <p>{errors.img.message}</p>}
                 </fieldset>
                 <button type="submit">Create</button>

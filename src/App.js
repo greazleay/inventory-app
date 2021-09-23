@@ -17,20 +17,30 @@ import { useState, useEffect } from 'react';
 const App = () => {
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [reloadCategories, setReloadCategories] = useState(false)
 
   const fetchCategories = async () => {
-    const res = await fetch('https://inv-hub.herokuapp.com/api/categories');
+    let res;
+    try {
+      res = await fetch('https://inv-hub.herokuapp.com/api/categories');
+      if (!res.ok) throw new Error('Something went wrong')
+    } catch (err) {
+      console.log("<======>", err.message)
+      return
+    }
+
     const data = await res.json();
     setCategories(data);
     setLoadingCategories(false)
-  };
+    console.log("======", "CALLED!!!")
+  }
 
   useEffect(() => {
     fetchCategories()
-  }, [])
+  }, [reloadCategories])
 
   const filteredCategory = categories.map(category => {
-    return {id: category._id, name: category.name}
+    return { id: category._id, name: category.name }
   });
 
   return (
@@ -38,16 +48,16 @@ const App = () => {
       <div className="container">
         <NavBar />
         <Switch>
-          <Route exact path="/"><Home/></Route>
+          <Route exact path="/"><Home /></Route>
           <Route exact path="/categories"><Categories categories={categories} loading={loadingCategories} /></Route>
           <Route exact path="/categories/:id"><CategoryDetails /></Route>
-          <Route exact path="/new-category"><NewCategory /></Route>
+          <Route exact path="/new-category"><NewCategory reloadCategories={reload => { setLoadingCategories(true); setReloadCategories(reload) }} /></Route>
           <Route exact path="/categories/:id/modify"><ModifyCategory /></Route>
           <Route exact path="/categories/:id/delete"><DeleteCategory /></Route>
           <Route exact path="/products"><Products /></Route>
           <Route exact path="/products/:id"><ProductDetails /></Route>
-          <Route exact path="/new-product"><NewProduct categories={filteredCategory}/></Route>
-          <Route exact path="/products/:id/modify"><ModifyProduct categoryList={filteredCategory}/></Route>
+          <Route exact path="/new-product"><NewProduct categories={filteredCategory} /></Route>
+          <Route exact path="/products/:id/modify"><ModifyProduct categoryList={filteredCategory} /></Route>
           <Route exact path="/products/:id/delete"><DeleteProduct /></Route>
         </Switch>
         <Footer />
