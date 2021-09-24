@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { Convert } from 'mongo-image-converter';
 import axios from "axios";
 
-
 const ModifyProduct = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     let history = useHistory();
@@ -28,13 +27,13 @@ const ModifyProduct = (props) => {
             parsedData = data
         }
 
-        axios.put(`https://inv-hub.herokuapp.com/api/products/${product._id}/update`, parsedData)
-            .then(setTimeout(() => { history.push(`/products/${product._id}`) }, 2000))
-            .catch((err) => {
-                console.log(err.message)
-                return
-            })
+        try {
+            axios.put(`https://inv-hub.herokuapp.com/api/products/${product._id}/update`, parsedData);    
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`)
+        }
         setSubmitted(true);
+        setTimeout(() => { history.replace(`/products/${product._id}`) }, 2000);
     }
 
     const handleClick = () => {
@@ -62,7 +61,7 @@ const ModifyProduct = (props) => {
                 {props.categoryList.map(category =>
                     <div key={category.id}>
                         <label htmlFor={category.name}>{category.name}</label>
-                        <input type='checkbox' value={category.id} {...register('categories')} />
+                        <input type='checkbox' value={category.id} {...register('categories')} defaultChecked={product.categories.map(cat => cat._id).includes(category.id)}/>
                     </div>
                 )}
             </fieldset>

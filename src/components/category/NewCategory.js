@@ -8,23 +8,17 @@ import axios from "axios";
 const CreateCategory = ({ reloadCategories }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [submitted, setSubmitted] = useState(false);
-    const [reload, setReload] = useState(false);
     let history = useHistory();
 
-    const onSubmit = (data) => {
-        axios.post('https://inv-hub.herokuapp.com/api/categories/create', data)
-            .then(setTimeout(() => {
-                history.push('/categories')
-            }, 2000))
-            .catch((err) => {
-                console.log(err.message);
-                return
-            })
+    const onSubmit = async (data) => {
+        try {
+         await axios.post('https://inv-hub.herokuapp.com/api/categories/create', data);  
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`);
+        }
+        await reloadCategories(true);
         setSubmitted(true);
-        let toggler = reload ? false : true
-        setReload(toggler);
-        reloadCategories(toggler)
-        console.log('===toggler====>', toggler)
+        setTimeout(() => history.replace('/categories'), 2000);
     }
 
     return (

@@ -1,5 +1,5 @@
 import "../../assets/css/category/categories.css";
-import React, {  } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Categories = ({ categories, loading }) => {
@@ -9,12 +9,10 @@ const Categories = ({ categories, loading }) => {
             <h2>{category.name}</h2>
             <p>{category.description}</p>
             <Link to={`/categories/${category._id}`}>
-                <button>View category</button>
+                <button className="btn">View category</button>
             </Link>
         </div>
     ));
-
-    console.log('===loading====>', categories.length)
 
     const content = <>
         <Link to="/new-category">
@@ -26,12 +24,10 @@ const Categories = ({ categories, loading }) => {
     </>
 
     return (
-        <main className="category-main">
+        <main className="main">
             {loading ? <p className="loading">Loading categories.....</p> : content}
         </main>
     )
-};
+}; 
 
-export default React.memo(Categories, (prevProps, nextProps) => {
-    return nextProps.loading === prevProps.loading
-}) 
+export default Categories

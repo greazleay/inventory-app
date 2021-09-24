@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
 
-
 const DeleteProduct = () => {
     const [loadingData, setLoadingData] = useState(true)
     const [product, setProduct] = useState({});
@@ -15,14 +14,14 @@ const DeleteProduct = () => {
         setLoadingData(false)
     }, [])
 
-    const handleDelete = () => {
-        axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)
-            .then(setTimeout(() => { history.push('/products') }, 2000))
-            .catch((err) => {
-                console.log(err.message)
-                return
-            })
-        setDeleted(true)
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)    
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`);
+        };
+        setDeleted(true);
+        setTimeout(() => { history.replace('/products') }, 2000);
     }
 
     const content = () => (

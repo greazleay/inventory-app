@@ -13,16 +13,14 @@ const NewProduct = (props) => {
 
     const onSubmit = async (data) => {
         const imageString = await Convert(data.img[0]);
-        const parsedData = { ...data, img: imageString }
-        axios.post('https://inv-hub.herokuapp.com/api/products/create', parsedData)
-            .then(setTimeout(() => {
-                history.push('/products')
-            }, 2000))
-            .catch((err) => {
-                console.log(err.message)
-                return
-            })
-        setSubmitted(true)
+        const parsedData = { ...data, img: imageString };
+        try {
+            axios.post('https://inv-hub.herokuapp.com/api/products/create', parsedData)    
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`);
+        }
+        setSubmitted(true);
+        setTimeout(() => { history.replace('/products') }, 2000);
     }
 
     return (
@@ -40,11 +38,11 @@ const NewProduct = (props) => {
                     {errors.description && <p>Please add a brief description</p>}
                 </fieldset>
                 <fieldset>
-                    {props.categories.map(category => 
+                    {props.categories.map(category =>
                         <div key={category.id}>
                             <label htmlFor={category.name}>{category.name}</label>
                             <input type='checkbox' value={category.id} {...register('categories')} />
-                        </div>  
+                        </div>
                     )}
                 </fieldset>
                 <fieldset>
@@ -59,7 +57,7 @@ const NewProduct = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="img">Image</label>
-                    <input {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" accept=".png, .jpg"/>
+                    <input {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" accept=".png, .jpg" />
                     {errors.img && <p>{errors.img.message}</p>}
                 </fieldset>
                 <button type="submit">Create</button>

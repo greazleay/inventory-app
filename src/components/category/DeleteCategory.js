@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import axios from "axios";
 
 
-const DeleteCategory = () => {
+const DeleteCategory = ({ refetchCategories }) => {
     const [loadingData, setLoadingData] = useState(true)
     const [category, setCategory] = useState({});
     let history = useHistory()
@@ -15,14 +15,15 @@ const DeleteCategory = () => {
         setLoadingData(false)
     }, [])
 
-    const handleDelete = () => {
-        axios.delete(`https://inv-hub.herokuapp.com/api/categories/${category._id}/delete`)
-            .then(setTimeout(() => { history.push('/categories') }, 2000))
-            .catch((err) => {
-                console.log(err.message)
-                return
-            })
-        setDeleted(true)
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`https://inv-hub.herokuapp.com/api/categories/${category._id}/delete`); 
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`)
+        };
+        await refetchCategories(true);
+        setDeleted(true);
+        setTimeout(() => { history.replace('/categories') }, 2000);
     }
 
     const content = () => (

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 
-const ModifyCategory = () => {
+const ModifyCategory = ({ refetchCategories }) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     let history = useHistory()
     const [loadingData, setLoadingData] = useState(true)
@@ -17,18 +17,19 @@ const ModifyCategory = () => {
         setLoadingData(false)
     }, [])
 
-    const onSubmit = (data) => {
-        axios.put(`https://inv-hub.herokuapp.com/api/categories/${category._id}/update`, data)
-            .then(setTimeout(() => { history.push(`/categories/${category._id}`) }, 2000))
-            .catch((err) => {
-                console.log(err.message)
-                return
-            })
-        setSubmitted(true)
+    const onSubmit = async (data) => {
+        try {
+            await axios.put(`https://inv-hub.herokuapp.com/api/categories/${category._id}/update`, data);
+        } catch (err) {
+            if (err) return console.log(`${err.name}: ${err.message}`)
+        };
+        await refetchCategories(true)
+        setSubmitted(true);
+        setTimeout(() => { history.replace(`/categories/${category._id}`) }, 2000);
     }
 
     const form = () => (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
             {submitted && <p>Success!!! Category Modified, redirecting....</p>}
             <fieldset>
                 <label htmlFor="name">Name</label>
@@ -40,12 +41,12 @@ const ModifyCategory = () => {
                 <textarea {...register('description', { required: "PLEASE ADD A BRIEF DESCRIPTION", minLength: 1, value: `${category.description}` })} />
                 {errors.description && <p>{errors.description.message}</p>}
             </fieldset>
-            <button type="submit">Modify</button>
+            <button className="btn" type="submit">Modify</button>
         </form>
     )
 
     return (
-        <main>
+        <main className="main">
             {loadingData ? <p>Please Wait......</p> : form()}
         </main>
     )

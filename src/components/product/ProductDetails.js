@@ -11,7 +11,12 @@ const ProductDetails = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const res = await fetch(`https://inv-hub.herokuapp.com/api/products/${id}`);
+            let res;
+            try {
+                res = await fetch(`https://inv-hub.herokuapp.com/api/products/${id}`);
+            } catch (err) {
+                if (err) return console.log(`${err.name}: ${err.message}`);
+            };
             const data = await res.json();
             setProduct(data);
             setLoadingProduct(false);

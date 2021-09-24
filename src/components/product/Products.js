@@ -10,12 +10,10 @@ const Products = () => {
     const fetchProducts = async () => {
         let res;
         try {
-            res = await fetch('https://inv-hub.herokuapp.com/api/products');
-            if (!res.ok) throw new Error('Something went wrong')    
+            res = await fetch('https://inv-hub.herokuapp.com/api/products');   
         } catch (err) {
-            console.log(err.message);
-            return
-        }
+            if (err) return console.log(`${err.name}: ${err.message}`);
+        };
         
         const data = await res.json();
         setProducts(data);
@@ -24,7 +22,7 @@ const Products = () => {
 
     useEffect(() => {
         fetchProducts()
-    }, [])
+    }, []);
 
     const productList = products.map(product => (
         <div className="product" key={product._id}>

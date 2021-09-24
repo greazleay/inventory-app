@@ -3,8 +3,8 @@ import React from "react";
 
 const Home = () => {
   return (
-    <main className="home">
-      <div>
+    <main className="main">
+      <div className="welcome">
         <h1>Welcome to Inventory Hub</h1>
         <hr />
         <p>
