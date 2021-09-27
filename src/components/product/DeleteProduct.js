@@ -2,6 +2,7 @@ import "../../assets/css/product/deleteProduct.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const DeleteProduct = () => {
     const [loadingData, setLoadingData] = useState(true)
@@ -16,7 +17,7 @@ const DeleteProduct = () => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)    
+            await axios.delete(`https://inv-hub.herokuapp.com/api/products/${product._id}/delete`)
         } catch (err) {
             if (err) return console.log(`${err.name}: ${err.message}`);
         };
@@ -25,16 +26,27 @@ const DeleteProduct = () => {
     }
 
     const content = () => (
-        <div>
+        <>
+            <div>
+                <h1>Delete Product</h1>
+                <hr />
+            </div>
             {deleted && <h2>Product Deleted!!!, Redirecting...</h2>}
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <button onClick={handleDelete}>Delete</button>
-        </div>
+            <div>
+                <h1>{product.name}</h1>
+                <p>{product.description}</p>
+            </div>
+            <div className="delete-options">
+                <button className="btn btn-mod" onClick={handleDelete}>Delete</button>
+                <Link to={`/products/${product._id}`}>
+                    <button className="btn btn-mod">Go back</button>
+                </Link>
+            </div>
+        </>
     )
 
     return (
-        <main>
+        <main className="main">
             {loadingData ? <p>Please Wait......</p> : content()}
         </main>
     )

@@ -24,8 +24,12 @@ const NewProduct = (props) => {
     }
 
     return (
-        <main className="new-category">
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <main className="main">
+            <div>
+                <h1>New Product</h1>
+                <hr/>
+            </div>
+            <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
                 {submitted ? <p>Success!!! Category created, redirecting....</p> : null}
                 <fieldset>
                     <label htmlFor="name">Name</label>
@@ -34,7 +38,7 @@ const NewProduct = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="description">Description</label>
-                    <textarea {...register('description', { required: true, minLength: 1 })} />
+                    <textarea className="txt" {...register('description', { required: true, minLength: 1 })} />
                     {errors.description && <p>Please add a brief description</p>}
                 </fieldset>
                 <fieldset>
@@ -57,10 +61,10 @@ const NewProduct = (props) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="img">Image</label>
-                    <input {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" accept=".png, .jpg" />
+                    <input className="choose" {...register('img', { required: "PLEASE UPLOAD AN IMAGE" })} type="file" accept=".png, .jpg" />
                     {errors.img && <p>{errors.img.message}</p>}
                 </fieldset>
-                <button type="submit">Create</button>
+                <button className="btn" type="submit">Create</button>
             </form>
         </main>
     )

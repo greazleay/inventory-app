@@ -37,13 +37,13 @@ const Products = () => {
 
     const content = <div className="product-content">
         <Link to="/new-product">
-            <button>New Product</button>
+            <button className="btn">New Product</button>
         </Link>
         {productList}
     </div>
 
     return (
-        <main className="product-main">
+        <main className="main">
             {loadingProducts ? <p className="loading">Loading Products.....</p> : content}
         </main>
     )

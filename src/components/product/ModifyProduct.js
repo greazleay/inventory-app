@@ -45,19 +45,20 @@ const ModifyProduct = (props) => {
     }
 
     const form = () => (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
             {submitted ? <p>Success!!! Product Modified, redirecting....</p> : null}
             <fieldset>
-                <label htmlFor="name">Name </label>
+                <label htmlFor="name">Name</label>
                 <input {...register('name', { required: "NAME REQUIRED", minLength: 1, value: `${product.name}` })} />
                 {errors.name && <p>{errors.name.message}</p>}
             </fieldset>
             <fieldset>
-                <label htmlFor="description">Description </label>
-                <textarea {...register('description', { required: true, minLength: 1, value: `${product.description}` })} />
+                <label htmlFor="description">Description</label>
+                <textarea className="txt" {...register('description', { required: true, minLength: 1, value: `${product.description}` })} />
                 {errors.description && <p>Please add a brief description</p>}
             </fieldset>
             <fieldset>
+                <label>Categories:</label>
                 {props.categoryList.map(category =>
                     <div key={category.id}>
                         <label htmlFor={category.name}>{category.name}</label>
@@ -66,7 +67,7 @@ const ModifyProduct = (props) => {
                 )}
             </fieldset>
             <fieldset>
-                <label htmlFor="price">Price </label>
+                <label htmlFor="price">Price</label>
                 <input {...register('price', { required: "PRICE REQUIRED", minLength: 1, value: `${product.price}` })} />
                 {errors.price && <p>{errors.price.message}</p>}
             </fieldset>
@@ -76,20 +77,24 @@ const ModifyProduct = (props) => {
                 {errors.stock && <p>{errors.stock.message}</p>}
             </fieldset>
             <fieldset>
-                <label>Change Image: </label>
-                <input type="button" value={changeImage ? 'NO' : 'YES'} onClick={handleClick} />
+                <label>Change Image:</label>
+                <input className="btn" type="button" value={changeImage ? 'NO' : 'YES'} onClick={handleClick} />
             </fieldset>
             {changeImage && <fieldset>
-                <label htmlFor="img">Image </label>
-                <input {...register('img', { required: "PLEASE UPLOAD PRODUCT IMAGE" })} type="file" accept=".png, .jpg" />
+                <label htmlFor="img">Image</label>
+                <input className="choose" {...register('img', { required: "PLEASE UPLOAD PRODUCT IMAGE" })} type="file" accept=".png, .jpg" />
                 {errors.img && <p>{errors.img.message}</p>}
             </fieldset>}
-            <button type="submit">Modify</button>
+            <button className="btn" type="submit">Modify</button>
         </form>
     )
 
     return (
-        <main>
+        <main className="main">
+            <div>
+                <h1>Modify Product</h1>
+                <hr/>
+            </div>
             {loadingProduct ? <p>Loading Product......</p> : form()}
         </main>
     )

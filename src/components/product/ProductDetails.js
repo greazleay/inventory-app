@@ -28,24 +28,29 @@ const ProductDetails = () => {
         localStorage.setItem('product', JSON.stringify(data));
     }
 
-    const content = () => (<>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        {product.categories.length && product.categories.map(category =>
-            <p key={category._id}>{category.name}</p>
-        )}
-        <p>{product.price}</p>
-        <p>{product.stock}</p>
+    const content = () => (<div className="category category-mod">
+        <h2>{product.name}</h2><hr />
+        <p>Description: {product.description}</p><hr />
+        <div className="categories">
+            <span>Categories:</span>
+            {product.categories.length && product.categories.map(category =>
+                <Link key={category._id} to={`/categories/${category._id}`}>{category.name}</Link>
+            )}
+        </div><hr />
+        <p>Price: ${product.price}</p>
+        <p>Stock: {product.stock}</p>
         <img src={product.img} alt="" />
-        <Link to={`/products/${id}/modify`}>
-            <button onClick={() => setUpdateData(product)}>Modify Product</button>
-        </Link>
-        <Link to={`/products/${id}/delete`}>
-            <button onClick={() => setUpdateData(product)}>Delete Product</button>
-        </Link>
-    </>)
+        <div className="btns">
+            <Link to={`/products/${id}/modify`}>
+                <button className="btn" onClick={() => setUpdateData(product)}>Modify Product</button>
+            </Link>
+            <Link to={`/products/${id}/delete`}>
+                <button className="btn" onClick={() => setUpdateData(product)}>Delete Product</button>
+            </Link>
+        </div>
+    </div>)
     return (
-        <main className="category-detail-main">
+        <main className="main">
             {loadingProduct ? <p className="loading">Loading Product.....</p> : content()}
         </main>
     )

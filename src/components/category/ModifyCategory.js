@@ -46,7 +46,10 @@ const ModifyCategory = ({ refetchCategories }) => {
     )
 
     return (
-        <main className="main">
+        <main className="new-category">
+            <div>
+                <h1>Modify Category</h1><hr />
+            </div>
             {loadingData ? <p>Please Wait......</p> : form()}
         </main>
     )

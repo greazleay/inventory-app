@@ -11,12 +11,17 @@ import NewProduct from './components/product/NewProduct';
 import ModifyProduct from './components/product/ModifyProduct';
 import DeleteProduct from './components/product/DeleteProduct';
 import Footer from './components/Footer';
+import SearchResults from './components/SearchResults';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import useDebounce from './hooks/useDebounce';
 
 const App = () => {
   const [loadingCategories, setLoadingCategories] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(true);
+  const [results, setResults] = useState([]);
 
   const fetchCategories = async () => {
     let res;
@@ -39,10 +44,33 @@ const App = () => {
     return { id: category._id, name: category.name }
   });
 
+  const handleSearch = (data) => {
+    setSearchTerm(data)
+  };
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 2000)
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      let res;
+      try {
+        res = await fetch(`https://inv-hub.herokuapp.com/api/products/search?q=${debouncedSearchTerm}`)
+      } catch (err) {
+        if (err) return console.log(`${err.name}: ${err.message}`)
+      }
+
+      const data = await res.json();
+      setIsSearching(false);
+      setResults(data);
+      setSearchTerm('');
+    };
+    if (debouncedSearchTerm) fetchResults()
+  }, [debouncedSearchTerm])
+
   return (
     <Router>
       <div className="container">
-        <NavBar />
+        <NavBar searchTerm={searchTerm} handleChange={handleSearch} />
         <Switch>
           <Route exact path="/inventory-app"><Home /></Route>
           <Route exact path="/categories"><Categories categories={categories} loading={loadingCategories} /></Route>
@@ -55,6 +83,7 @@ const App = () => {
           <Route exact path="/new-product"><NewProduct categories={filteredCategory} /></Route>
           <Route exact path="/products/:id/modify"><ModifyProduct categoryList={filteredCategory} /></Route>
           <Route exact path="/products/:id/delete"><DeleteProduct /></Route>
+          <Route exact path="/search"><SearchResults isSearching={isSearching} results={results} /></Route>
           <Redirect to="/inventory-app" />
         </Switch>
         <Footer />

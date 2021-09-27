@@ -2,6 +2,7 @@ import "../../assets/css/product/deleteProduct.css";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const DeleteCategory = ({ refetchCategories }) => {
@@ -17,7 +18,7 @@ const DeleteCategory = ({ refetchCategories }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`https://inv-hub.herokuapp.com/api/categories/${category._id}/delete`); 
+            await axios.delete(`https://inv-hub.herokuapp.com/api/categories/${category._id}/delete`);
         } catch (err) {
             if (err) return console.log(`${err.name}: ${err.message}`)
         };
@@ -27,16 +28,27 @@ const DeleteCategory = ({ refetchCategories }) => {
     }
 
     const content = () => (
-        <div>
+        <>
+            <div>
+                <h1>Delete Category</h1>
+                <hr />
+            </div>
             {deleted && <h2>Category Deleted!!! Redirecting....</h2>}
-            <h1>{category.name}</h1>
-            <p>{category.description}</p>
-            <button onClick={handleDelete}>Delete</button>
-        </div>
+            <div>
+                <h2>{category.name}</h2>
+                <p>{category.description}</p>
+            </div>
+            <div className="delete-options">
+                <button className="btn btn-mod" onClick={handleDelete}>Delete</button>
+                <Link to={`/categories/${category._id}`}>
+                    <button className="btn btn-mod">Go back</button>
+                </Link>
+            </div>
+        </>
     )
 
     return (
-        <main>
+        <main className="main">
             {loadingData ? <p>Please Wait......</p> : content()}
         </main>
     )

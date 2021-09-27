@@ -1,0 +1,9 @@
+.delete-options {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
+.btn-mod {
+  flex: none;
+}

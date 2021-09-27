@@ -12,7 +12,7 @@ const CreateCategory = ({ reloadCategories }) => {
 
     const onSubmit = async (data) => {
         try {
-         await axios.post('https://inv-hub.herokuapp.com/api/categories/create', data);  
+            await axios.post('https://inv-hub.herokuapp.com/api/categories/create', data);
         } catch (err) {
             if (err) return console.log(`${err.name}: ${err.message}`);
         }
@@ -23,7 +23,10 @@ const CreateCategory = ({ reloadCategories }) => {
 
     return (
         <main className="new-category">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+                <h1>New Category</h1><hr />
+            </div>
+            <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
                 {submitted && <p>Success!!! Category created, redirecting...</p>}
                 <fieldset>
                     <label htmlFor="name">Name</label>
@@ -35,7 +38,7 @@ const CreateCategory = ({ reloadCategories }) => {
                     <textarea {...register('description', { required: "PLEASE ADD A BRIEF DESCRIPTION", minLength: 1 })} />
                     {errors.description && <p>{errors.description.message}</p>}
                 </fieldset>
-                <button type="submit">Create</button>
+                <button className="btn" type="submit">Create</button>
             </form>
         </main>
     )

@@ -1,0 +1,21 @@
+.categories {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.category-mod span {
+    font-weight: bolder;
+}
+
+.category-mod a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.category-mod a:hover {
+    color: #eec659;
+    text-decoration-line: overline;
+    font-weight: 700;
+}

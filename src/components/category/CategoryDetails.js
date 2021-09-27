@@ -48,7 +48,6 @@ const CategoryDetails = () => {
                 <div className="category" key={product._id}>
                     <img src={product.img} alt="" />
                     <p>{product.name}</p>
-                    {/* <p>{product.description}</p> */}
                     <Link to={`/products/${product._id}`}>
                         <button className="btn">View Product</button>
                     </Link>
