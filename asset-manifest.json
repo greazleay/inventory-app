@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/inventory-app/static/css/main.b42e67f3.chunk.css",
-    "main.js": "/inventory-app/static/js/main.94aa21dd.chunk.js",
-    "main.js.map": "/inventory-app/static/js/main.94aa21dd.chunk.js.map",
+    "main.css": "/inventory-app/static/css/main.3aec9a6b.chunk.css",
+    "main.js": "/inventory-app/static/js/main.96dea943.chunk.js",
+    "main.js.map": "/inventory-app/static/js/main.96dea943.chunk.js.map",
     "runtime-main.js": "/inventory-app/static/js/runtime-main.272b825d.js",
     "runtime-main.js.map": "/inventory-app/static/js/runtime-main.272b825d.js.map",
     "static/js/2.a1d235d9.chunk.js": "/inventory-app/static/js/2.a1d235d9.chunk.js",
     "static/js/2.a1d235d9.chunk.js.map": "/inventory-app/static/js/2.a1d235d9.chunk.js.map",
     "index.html": "/inventory-app/index.html",
-    "static/css/main.b42e67f3.chunk.css.map": "/inventory-app/static/css/main.b42e67f3.chunk.css.map",
+    "static/css/main.3aec9a6b.chunk.css.map": "/inventory-app/static/css/main.3aec9a6b.chunk.css.map",
     "static/js/2.a1d235d9.chunk.js.LICENSE.txt": "/inventory-app/static/js/2.a1d235d9.chunk.js.LICENSE.txt",
     "static/media/404.a9195f31.png": "/inventory-app/static/media/404.a9195f31.png",
     "static/media/index.css": "/inventory-app/static/media/Assistant-VariableFont_wght.8260db3b.ttf"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.272b825d.js",
     "static/js/2.a1d235d9.chunk.js",
-    "static/css/main.b42e67f3.chunk.css",
-    "static/js/main.94aa21dd.chunk.js"
+    "static/css/main.3aec9a6b.chunk.css",
+    "static/js/main.96dea943.chunk.js"
   ]
 }
