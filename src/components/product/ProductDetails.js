@@ -30,15 +30,15 @@ const ProductDetails = () => {
 
     const content = () => (<div className="category category-mod">
         <h2>{product.name}</h2><hr />
-        <p>Description: {product.description}</p><hr />
+        <p><span>Description:</span> {product.description}</p><hr />
         <div className="categories">
             <span>Categories:</span>
             {product.categories.length && product.categories.map(category =>
                 <Link key={category._id} to={`/categories/${category._id}`}>{category.name}</Link>
             )}
         </div><hr />
-        <p>Price: ${product.price}</p>
-        <p>Stock: {product.stock}</p>
+        <p><span>Price:</span> ${product.price}</p>
+        <p><span>Stock:</span> {product.stock}</p>
         <img src={product.img} alt="" />
         <div className="btns">
             <Link to={`/products/${id}/modify`}>

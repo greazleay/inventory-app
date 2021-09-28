@@ -1,8 +1,9 @@
 .category-list {
-  flex: 2 1 0;
+  flex: 5 1 0;
   display: flex;
   flex-flow: row wrap;
-  place-content: center space-around;
+  place-content: start space-around;
+  margin-top: 1em;
 }
 
 .category {

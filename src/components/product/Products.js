@@ -10,11 +10,11 @@ const Products = () => {
     const fetchProducts = async () => {
         let res;
         try {
-            res = await fetch('https://inv-hub.herokuapp.com/api/products');   
+            res = await fetch('https://inv-hub.herokuapp.com/api/products');
         } catch (err) {
             if (err) return console.log(`${err.name}: ${err.message}`);
         };
-        
+
         const data = await res.json();
         setProducts(data);
         setLoadingProducts(false)
@@ -25,22 +25,25 @@ const Products = () => {
     }, []);
 
     const productList = products.map(product => (
-        <div className="product" key={product._id}>
+        <div className="category" key={product._id}>
             <h2>{product.name}</h2>
             <p>{product.description}</p>
             <img src={product.img} alt="" />
             <Link to={`/products/${product._id}`}>
-                <button>View Product</button>
+                <button className="btn">View Product</button>
             </Link>
         </div>
     ));
 
-    const content = <div className="product-content">
+    const content = <>
         <Link to="/new-product">
             <button className="btn">New Product</button>
         </Link>
-        {productList}
-    </div>
+        <div className="product-content">
+            {productList}
+        </div>
+    </>
+
 
     return (
         <main className="main">

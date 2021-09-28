@@ -52,17 +52,21 @@ const App = () => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      let res;
+
       try {
-        res = await fetch(`https://inv-hub.herokuapp.com/api/products/search?q=${debouncedSearchTerm}`)
+        const res = await fetch(`https://inv-hub.herokuapp.com/api/products/search?q=${debouncedSearchTerm}`);
+        if (!res.ok) {
+          setIsSearching(false);
+          setResults([]);
+          setSearchTerm('');
+        }
+        const data = await res.json();
+        setIsSearching(false);
+        setResults(data);
+        setSearchTerm('');
       } catch (err) {
         if (err) return console.log(`${err.name}: ${err.message}`)
       }
-
-      const data = await res.json();
-      setIsSearching(false);
-      setResults(data);
-      setSearchTerm('');
     };
     if (debouncedSearchTerm) fetchResults()
   }, [debouncedSearchTerm])

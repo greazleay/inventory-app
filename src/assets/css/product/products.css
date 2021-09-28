@@ -1,0 +1,5 @@
+.product-content {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 1em;
+}
