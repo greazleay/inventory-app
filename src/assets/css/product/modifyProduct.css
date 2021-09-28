@@ -43,3 +43,7 @@ input[type="checkbox"]:checked {
     url("data:image/gif;base64,R0lGODlhCwAKAIABAP////3cnSH5BAEKAAEALAAAAAALAAoAAAIUjH+AC73WHIsw0UCjglraO20PNhYAOw==")
     3px 3px no-repeat;
 }
+
+.flex-form-mod {
+  margin-top: 2em;
+}

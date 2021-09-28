@@ -45,7 +45,7 @@ const ModifyProduct = (props) => {
     }
 
     const form = () => (
-        <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex-form flex-form-mod" onSubmit={handleSubmit(onSubmit)}>
             {submitted ? <p>Success!!! Product Modified, redirecting....</p> : null}
             <fieldset>
                 <label htmlFor="name">Name</label>

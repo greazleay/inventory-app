@@ -1,7 +1,8 @@
 import "../assets/css/Home.css";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ isHomeLoading, homeData }) => {
   return (
     <main className="main">
       <div className="welcome">
@@ -16,6 +17,14 @@ const Home = () => {
           quis sem enim. Proin lobortis, mauris quis bibendum fringilla, mi diam
           convallis ante, nec laoreet est nisl in libero. Duis lobortis.
         </p>
+        {!isHomeLoading && <div>
+          <Link to='/categories'>
+            <h4>Total Categories: {homeData.category_count}</h4>
+          </Link>
+          <Link to='/products'>
+            <h4>Total Products: {homeData.product_count}</h4>
+          </Link>
+        </div>}
       </div>
     </main>
   );

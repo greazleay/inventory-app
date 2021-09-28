@@ -15,6 +15,7 @@ import SearchResults from './components/SearchResults';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useDebounce from './hooks/useDebounce';
+import useHttp from './hooks/useHttp';
 
 const App = () => {
   const [loadingCategories, setLoadingCategories] = useState(true);
@@ -22,6 +23,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(true);
   const [results, setResults] = useState([]);
+  const [isHomeLoading, homeData] = useHttp('https://inv-hub.herokuapp.com/api', [])
 
   const fetchCategories = async () => {
     let res;
@@ -76,7 +78,7 @@ const App = () => {
       <div className="container">
         <NavBar searchTerm={searchTerm} handleChange={handleSearch} />
         <Switch>
-          <Route exact path="/inventory-app"><Home /></Route>
+          <Route exact path="/inventory-app"><Home isHomeLoading={isHomeLoading} homeData={homeData}/></Route>
           <Route exact path="/categories"><Categories categories={categories} loading={loadingCategories} /></Route>
           <Route exact path="/categories/:id"><CategoryDetails /></Route>
           <Route exact path="/new-category"><NewCategory reloadCategories={fetchCategories} /></Route>

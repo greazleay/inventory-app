@@ -29,7 +29,7 @@ const NewProduct = (props) => {
                 <h1>New Product</h1>
                 <hr/>
             </div>
-            <form className="flex-form" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex-form flex-form-mod" onSubmit={handleSubmit(onSubmit)}>
                 {submitted ? <p>Success!!! Category created, redirecting....</p> : null}
                 <fieldset>
                     <label htmlFor="name">Name</label>

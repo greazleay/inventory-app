@@ -9,3 +9,9 @@
 .welcome hr {
     width: 100%;
 }
+
+.welcome a {
+    color: white;
+    cursor: pointer;
+    text-decoration-line: initial;
+}
